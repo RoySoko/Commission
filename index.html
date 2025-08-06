@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Amanda Sokolowski">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Commission Report</title>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; }
+    h1 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    p { margin: 0.3rem 0; }
+  </style>
+</head>
+<body>
+  <script>
+    var userName = prompt("Enter your name:");
+    var subtotal = 0;
+    var saleInput;
+    do {
+      saleInput = prompt(
+        "Enter the dollar amount for your sales a single sale at a time.\n" +
+        "Enter Done when you are finished."
+      );
+      // If it’s a number, add to subtotal
+      if (
+        saleInput !== null &&
+        saleInput.toLowerCase() !== "done"
+      ) {
+        var sale = parseFloat(saleInput);
+        if (!isNaN(sale)) {
+          subtotal += sale;
+        }
+      }
+    } while (
+      saleInput !== null &&
+      saleInput.toLowerCase() !== "done"
+    );
+
+    // Decide rate 
+    var rate;
+    if (subtotal <= 0) {
+      rate = 0;
+    } else if (subtotal <= 499.99) {
+      rate = 0.05;
+    } else if (subtotal <= 999.99) {
+      rate = 0.10;
+    } else {
+      rate = 0.15;
+    }
+
+    // Calculate commission & total
+    var commission    = subtotal * rate;
+    var totalEarnings = subtotal + commission;
+
+    document.write(
+      "<h1>Hello " + userName + ", Here is your Weekly Commission Report.</h1>" +
+      "<p>Your sales total is $"     + subtotal.toFixed(2) +
+         ", so your commission rate is " + (rate*100).toFixed(2) + "%</p>" +
+      "<p>Your total commission is $" + commission.toFixed(2) + ".</p>" +
+      "<p>Your total earnings are $"  + totalEarnings.toFixed(2) + "</p>"
+    );
+
+  </script>
+</body>
+</html>
